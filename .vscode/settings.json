@@ -2,6 +2,38 @@
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.autoBuild.run": "onSave",
 
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=out",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": [
+        "writing/out/%BASENAME%"
+      ]
+    }
+  ],
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatex -> biber -> xelatex",
+      "tools": [
+        "xelatex",
+        "biber",
+        "xelatex"
+      ]
+    }
+  ],
+
   "[latex]": {
     "editor.formatOnSave": false
   }

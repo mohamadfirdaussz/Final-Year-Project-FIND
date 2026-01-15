@@ -43,6 +43,7 @@
 
 % Typography and fonts
 \RequirePackage{fontspec}      % For loading OpenType fonts, required for custom font
+\RequirePackage{unicode-math}    % Required for \setmathfont
 
 % Citation and bibliography
 \RequirePackage[style=apa, backend=biber, natbib]{biblatex} % APA style bibliography using biber
@@ -63,17 +64,45 @@
 % Load listofsymbols with final option after tocloft
 \RequirePackage[final]{listofsymbols} % Load listofsymbols after tocloft
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Font Settings
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{indentfirst} % Indent first paragraph of sections
 
-% Set main font using fontspec (using Tahoma from a local directory named 'font/')
-% Requires compiling with XeLaTeX or LuaLaTeX
-\setmainfont{Tahoma}[
-  Path = font/,
-  Extension = .ttf,
-  BoldFont = tahomabd,
-]
+% ---------- siunitx configuration ----------
+\RequirePackage{siunitx}
+% Make siunitx follow the surrounding (Tahoma) font.
+\sisetup{
+  detect-all = true,  % detect family/shape/weight/etc.
+  mode       = text   % use text font instead of math font
+}
+
+% ---------- Main font: Tahoma ----------
+% Paths are relative to the *main .tex file*.
+% Folder structure example:
+%   main.tex
+%   font/fzkexam.cls
+%   font/tahoma.ttf
+%   font/tahomabd.ttf
+% Text font
+\setmainfont[
+  Path=font/,
+  UprightFont = tahoma.ttf,
+  BoldFont    = tahomabd.ttf,
+  ItalicFont  = tahoma.ttf,
+  ItalicFeatures = {FakeSlant=0.25},
+  BoldItalicFont = tahomabd.ttf,
+  BoldItalicFeatures = {FakeSlant=0.25}
+]{Tahoma}
+
+% Math letters (Latin only) also use Tahoma
+\setmathfont{Latin Modern Math}
+\setmathfont[
+  range=up,
+  Path=font/,
+  UprightFont=tahoma.ttf,
+  BoldFont=tahomabd.ttf
+]{Tahoma}
+
+% English helper: always italic (still Tahoma, with FakeSlant)
+\newcommand{\EN}[1]{\textit{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Section Formatting
@@ -538,11 +567,11 @@
     \thispagestyle{plain}  % Bottom-centered page number
     \vspace*{-0.3 in}
     \begin{center}
-        \PrefaceFontSection{ABSTRACT}\\ % "ABSTRACT" heading
+        {\PrefaceFontSection\textit{ABSTRACT}}\\ % "ABSTRACT" heading, bold (from PrefaceFontSection) and italic
     \end{center}
     \noindent % Ensure no indentation at the start
     \begin{justified} % Enforce left alignment (justification may depend on surrounding document)
-        \@abstract
+        \textit{\@abstract}
     \end{justified}
     \vfill\newpage
 }

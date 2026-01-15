@@ -53,6 +53,12 @@
 \RequirePackage{lineno}        % Line numbering
 %\RequirePackage{listofsymbols}   % List of symbols and abbreviations
 \RequirePackage{tikz}          % Graphics package
+\RequirePackage{lipsum}        % For placeholder text
+
+% Custom environments and commands
+\newenvironment{justified}{\par\justifying}{\par}
+\newcommand{\Fmeasure}{F-measure}
+\newcommand{\LeqPointFive}{p < 0.05}
 
 % Load listofsymbols with final option after tocloft
 \RequirePackage[final]{listofsymbols} % Load listofsymbols after tocloft
@@ -649,7 +655,7 @@
         \PrefaceFontSection{TABLE OF CONTENTS}} % "LIST OF CONTENTS" heading
 %\renewcommand{\cfttoctitlefont}{\hfill \fontsize{12}{14}\bfseries}
     \pagestyle{plain} % Plain page style for ToC
-    \tableofcontents  % Generate Table of Contents
+    %\tableofcontents  % Generate Table of Contents
     
 %%%%%   List of Figures
 
@@ -683,7 +689,7 @@
     \phantomsection
     \addcontentsline{toc}{chapter}{LIST OF ABBREVIATIONS} % Add List of Abbreviations to ToC
     \listofsubscripts % Generate List of Subscripts (if used by listofsymbols)
-    \listofsymbolss  % Generate List of Symbols/Abbreviations
+    \listofsymbols  % Generate List of Symbols/Abbreviations
 
     \clearpage%\clearemptydoublepage
     \pagenumbering{arabic} % Arabic page numbering for main content

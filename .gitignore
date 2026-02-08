@@ -19,3 +19,22 @@ writing/main.suc
 writing/main.syc
 writing/main.pdf
 writing/main.pdf
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+
+# Wafer Code Results & Artifacts
+Wafer_defect_Classification_code/data_loader_results
+Wafer_defect_Classification_code/Feature_engineering_results
+Wafer_defect_Classification_code/feature_selection_results
+Wafer_defect_Classification_code/model_artifacts
+Wafer_defect_Classification_code/preprocessing_results
+Wafer_defect_Classification_code/datasets
+*.npz
+*.parquet
+*.h5
+*.pkl
